@@ -177,3 +177,21 @@ filewrite(struct file *f, uint64 addr, int n)
 
   return ret;
 }
+
+int
+nopenfile(void)
+{
+  struct file *f;
+  int count = 0;
+
+  acquire(&ftable.lock);
+
+  for (f = ftable.file; f < ftable.file + NFILE; f++) {
+    if (f->ref > 0)
+      count++;
+  }
+
+  release(&ftable.lock);
+
+  return count;
+}
