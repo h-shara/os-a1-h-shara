@@ -28,6 +28,8 @@ int sync(void);
 int trace(int);
 struct sysinfo;
 int sysinfo(struct sysinfo *);
+struct uproc;
+int getprocs(struct uproc *, int);
 // ulib.c
 int stat(const char *, struct stat *);
 char *strcpy(char *, const char *);
